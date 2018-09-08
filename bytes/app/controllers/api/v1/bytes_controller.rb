@@ -24,16 +24,6 @@ class Api::V1::BytesController < ApplicationController
     end
   end
 
-  # PATCH/PUT /bytes/1
-  # PATCH/PUT /bytes/1.json
-  def update
-    if @byte.update(byte_params)
-      render :show, status: :ok, location: @byte
-    else
-      render json: @byte.errors, status: :unprocessable_entity
-    end
-  end
-
   # DELETE /bytes/1
   # DELETE /bytes/1.json
   def destroy
