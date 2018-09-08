@@ -7,7 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 require 'faker'
 
-5.times do
+100.times do
     User.create!(
         name: Faker::FunnyName.name,
         email: Faker::Internet.email,
@@ -16,14 +16,17 @@ require 'faker'
     )
 end
 
-5.times do
+200.times do
     Byte.create!(
-        body: Faker::FamousLastWords.last_words
+        body: Faker::FamousLastWords.last_words,
+        user_id: Faker::Number.between(1, 100)
     )
 end 
 
-5.times do
+400.times do
     Comment.create!(
-        body: Faker::FamousLastWords.last_words
+        body: Faker::FamousLastWords.last_words,
+        user_id: Faker::Number.between(1, 100),
+        byte_id: Faker::Number.between(1, 200)
     )
 end
