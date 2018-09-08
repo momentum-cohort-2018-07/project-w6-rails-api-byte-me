@@ -19,16 +19,7 @@ class Api::V1::BytesController < ApplicationController
 
     if @byte.save
       render :show, status: :created, location: @byte
-    else
-      render json: @byte.errors, status: :unprocessable_entity
-    end
-  end
-
-  # PATCH/PUT /bytes/1
-  # PATCH/PUT /bytes/1.json
-  def update
-    if @byte.update(byte_params)
-      render :show, status: :ok, location: @byte
+      render json: @byte, status: :created
     else
       render json: @byte.errors, status: :unprocessable_entity
     end
