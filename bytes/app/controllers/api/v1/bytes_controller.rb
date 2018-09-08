@@ -19,6 +19,7 @@ class Api::V1::BytesController < ApplicationController
 
     if @byte.save
       render :show, status: :created, location: @byte
+      render json: @byte, status: :created
     else
       render json: @byte.errors, status: :unprocessable_entity
     end
