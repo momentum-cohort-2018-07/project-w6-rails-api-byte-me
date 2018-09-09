@@ -1,5 +1,6 @@
 class Api::V1::CommentsController < ApplicationController
   before_action :set_comment, only: [:destroy]
+  before_action :set_user, only: [:destroy]
   skip_before_action :verify_authentication, only: [:index]
 
   def new
@@ -11,7 +12,14 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def index
-    @comments = Comments.all 
+
+    @comments = []
+
+    Comment.all.each do |comment|
+      if comment.byte_id === Byte.find(params[:byte_id]).id
+        @comments << comment
+      end
+    end
   end
 
   def create
@@ -27,7 +35,13 @@ class Api::V1::CommentsController < ApplicationController
   end
 
   def destroy
-    @comment.destroy 
+    if current_user === @user
+      @comment.destroy
+      render json: @comment, status: :destroyed
+    else
+  
+      render json: @comment.errors, status: :unprocessable_entity
+    end
   end
 
   private
@@ -36,7 +50,12 @@ class Api::V1::CommentsController < ApplicationController
     @comment = Comment.find(params[:id])
   end
 
-  def Comment_params
-    params.require(:byte).permit(:body, :user_id, :byte_id)
+  def set_user
+    ctest = Comment.find(params[:id]).user_id
+    @user = User.find(btest)
+  end
+
+  def comment_params
+    params.require(:comment).permit(:body, :user_id, :byte_id)
   end
 end
