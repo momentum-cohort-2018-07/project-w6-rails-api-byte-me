@@ -1,5 +1,6 @@
 class Api::V1::CommentsController < ApplicationController
   before_action :set_comment, only: [:destroy]
+  skip_before_action :verify_authentication, only: [:index]
 
   def new
     if current_user
