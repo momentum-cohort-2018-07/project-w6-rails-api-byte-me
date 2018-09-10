@@ -48,6 +48,8 @@ ActiveRecord::Schema.define(version: 2018_09_09_221248) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "api_token"
+    t.index ["api_token"], name: "index_users_on_api_token", unique: true
+    t.index ["username"], name: "index_users_on_username", unique: true
   end
 
 end
