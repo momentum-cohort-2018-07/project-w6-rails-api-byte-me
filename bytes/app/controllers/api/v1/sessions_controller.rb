@@ -8,4 +8,6 @@ class Api::V1::SessionsController < ApplicationController
       render json: { error: "Invalid" }, status: :unauthorized
     end
   end
+
+  
 end
