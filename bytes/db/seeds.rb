@@ -30,3 +30,11 @@ end
         byte_id: Faker::Number.between(1, 200)
     )
 end
+
+# following relationships
+users = User.all
+user = users.first
+following = users[2..200]
+followers = users[3..150]
+following.each { |followed| user.follow(followed) }
+followers.each { |follower| follower.follow(user) }
